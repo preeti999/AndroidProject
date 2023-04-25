@@ -15,8 +15,16 @@ import com.example.androidproject.recyclerview.ContactModel
 import com.example.androidproject.recyclerview.InviteAdapter
 import com.example.androidproject.recyclerview.MemberAdapter
 import com.example.androidproject.recyclerview.MemberModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
+
+    private val listContacts: ArrayList<ContactModel> = ArrayList()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -96,8 +104,24 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        val inviteAdapter = InviteAdapter(fetchContacts())
 
+        val inviteAdapter = InviteAdapter(listContacts)
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            listContacts.addAll(fetchContacts())
+
+            withContext(Dispatchers.Main) {
+                inviteAdapter.notifyDataSetChanged()
+
+            }
+
+        }
+
+        Log.d("FetchContacts", "fetchContacts: Start calling....")
+
+        Log.d("FetchContacts", "fetchContacts: Ending.....q")
         val inviteRecycler = requireView().findViewById<RecyclerView>(R.id.recycler_invite)
         inviteRecycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -108,6 +132,9 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("Range")
     private fun fetchContacts(): ArrayList<ContactModel> {
+
+        Log.d("FetchContacts", "fetchContacts: Start")
+
         val cr = requireActivity().contentResolver
         val cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null)
 
@@ -146,6 +173,7 @@ class HomeFragment : Fragment() {
                 cursor.close()
             }
         }
+        Log.d("FetchContacts", "fetchContacts: End")
         return listContacts
     }
 

@@ -13,12 +13,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-     val permission = arrayOf(
+    val permission = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.CAMERA,
-         Manifest.permission.READ_CONTACTS
+        Manifest.permission.READ_CONTACTS
     )
-     val permissionCode = 78;
+    val permissionCode = 78;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +34,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_guard -> {
                     inflateFragment(GuardFragment.newInstance())
                 }
+
                 R.id.nav_home -> {
                     inflateFragment(HomeFragment.newInstance())
                 }
+
                 R.id.nav_dashboard -> {
                     inflateFragment(MapsFragment())
                 }
+
                 R.id.nav_user -> {
                     inflateFragment(UserFragment.newInstance())
                 }
