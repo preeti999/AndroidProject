@@ -45,14 +45,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dimes_8dp"
+        android:layout_marginBottom="@dimen/dimes_8dp"
+        app:layout_constraintBottom_toTopOf="@id/invite_card"
         app:layout_constraintTop_toBottomOf="@id/txt_homeFragment"
         tools:listitem="@layout/item_member" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/invite_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimes_16dp"
+        app:cardCornerRadius="@dimen/dimes_16dp"
+        app:cardElevation="@dimen/dimes_8dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_invite"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/dimes_8dp"
+            tools:listitem="@layout/item_invite" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

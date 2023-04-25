@@ -16,12 +16,14 @@ class MainActivity : AppCompatActivity() {
      val permission = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.CAMERA,
+         Manifest.permission.READ_CONTACTS
     )
      val permissionCode = 78;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        HomeFragment.newInstance()
 
         val bottombar = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
